@@ -15,5 +15,10 @@ pipeline {
                 sh './gradlew build'
             }
         }
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: '/app/build/outputs/apk/*.apk', onlyIfSuccessful: true
+            }
+        }
     }
 }
