@@ -10,5 +10,10 @@ pipeline {
                     url: 'https://github.com/kursivee/android-jenkins-learning.git']]])
             }
         }
+        stage('Build') {
+            steps {
+                sh './gradlew build'
+            }
+        }
     }
 }
