@@ -21,7 +21,7 @@ pipeline {
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk', onlyIfSuccessful: true
-                archiveArtifacts artifacts: 'build/reports/profile/**/*.html'
+                archiveArtifacts artifacts: 'build/reports/profile/**/*.*'
             }
         }
 
