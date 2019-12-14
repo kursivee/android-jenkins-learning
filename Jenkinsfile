@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: '/app/build/outputs/apk/*.apk', onlyIfSuccessful: true
+                archiveArtifacts artifacts: '/**/*.apk', onlyIfSuccessful: true
             }
         }
     }
