@@ -15,12 +15,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew build'
+                sh './gradlew build --profile'
             }
         }
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'app/build/outputs/apk/**/*.apk', onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'build/reports/profile/**/*.*'
             }
         }
 
