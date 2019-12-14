@@ -15,7 +15,16 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew build --profile'
+                script {
+                    if(env.BRANCH_NAME == "master") {
+                        sh './gradlew build --profile'
+                    }
+                    if(env.BRANCH_NAME == "develop") {
+                        sh './gradlew lintDebug'
+                        sh './gradlew testDebugUnitTest'
+                        sh './gradlew assembleDebug --profile'
+                    }
+                }
             }
         }
         stage('Archive') {
