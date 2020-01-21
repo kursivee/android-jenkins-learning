@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 import kursivee.com.helloworld.R
+import kursivee.com.helloworld.common.action.RequestAction
+import kursivee.com.helloworld.login.presentation.login.action.LoginRequestAction
 
 class LoginFragment : Fragment() {
 
@@ -50,20 +52,20 @@ class LoginFragment : Fragment() {
                     loginButton?.let { component ->
                         btn_login.visibility = View.VISIBLE
                         btn_login.text = component.title
-                        component.onClickEvent?.let { event ->
-                            btn_login.setOnClickListener {
-                                dispatch(event)
+                        component.action?.let { action ->
+                            when(action) {
+                                is RequestAction -> {
+                                    btn_login.setOnClickListener {
+                                        viewModel.login(
+                                            LoginRequestAction(action.endpoint!!, action.host!!, et_username.text.toString(), et_password.text.toString())
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
                 }
             })
-        }
-    }
-
-    private fun dispatch(event: String) {
-        when(event) {
-            "LOGIN_EVENT" -> viewModel.login(et_username.text.toString(), et_password.text.toString())
         }
     }
 }

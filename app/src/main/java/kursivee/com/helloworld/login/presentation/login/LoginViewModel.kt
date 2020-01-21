@@ -9,6 +9,7 @@ import kursivee.com.helloworld.login.data.LoginServiceImpl
 import kursivee.com.helloworld.login.domain.AppInitService
 import kursivee.com.helloworld.login.domain.LoginService
 import kursivee.com.helloworld.login.domain.entity.LoginUiState
+import kursivee.com.helloworld.login.presentation.login.action.LoginRequestAction
 
 class LoginViewModel : ViewModel() {
     private val mutableState: MutableLiveData<LoginUiState> = MutableLiveData()
@@ -26,11 +27,12 @@ class LoginViewModel : ViewModel() {
         mutableState.value = appInitService.init()
     }
 
-    fun login(username: String, password: String) {
-        loginService.login(username, password).run {
+    fun login(action: LoginRequestAction) {
+        loginService.login(action).run {
             navigationEvent?.let {
                 NavigationService.goTo(it)
             }
         }
     }
+
 }

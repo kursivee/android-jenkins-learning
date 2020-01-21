@@ -1,5 +1,6 @@
 package kursivee.com.helloworld.login.data
 
+import kursivee.com.helloworld.common.action.RequestAction
 import kursivee.com.helloworld.common.component.BackgroundComponent
 import kursivee.com.helloworld.common.component.ButtonComponent
 import kursivee.com.helloworld.common.component.InputComponent
@@ -28,7 +29,12 @@ class AppInitServiceImpl: AppInitService {
                 "type": "row:button",
                 "title": "Login",
                 "actions": [
-                    "onClick": "LOGIN_EVENT"
+                    "onClick": {
+                        "type": "REQUEST",
+                        "name": "LOGIN_ACTION",
+                        "host": "DEV",
+                        "endpoint": "/login"
+                    }
                 ]
             }
         ]
@@ -39,7 +45,9 @@ class AppInitServiceImpl: AppInitService {
             BackgroundComponent(color = "#ff0000"),
             InputComponent("Username"),
             InputComponent("Password"),
-            ButtonComponent("Login", "LOGIN_EVENT")
+            ButtonComponent("Login",
+                RequestAction("LOGIN_ACTION", "DEV", "/login")
+            )
         )
     }
 }
