@@ -1,9 +1,7 @@
 package kursivee.com.helloworld.login.data
 
 import kursivee.com.helloworld.common.action.RequestAction
-import kursivee.com.helloworld.common.component.BackgroundComponent
-import kursivee.com.helloworld.common.component.ButtonComponent
-import kursivee.com.helloworld.common.component.InputComponent
+import kursivee.com.helloworld.common.component.*
 import kursivee.com.helloworld.login.domain.AppInitService
 import kursivee.com.helloworld.login.domain.entity.LoginUiState
 
@@ -42,11 +40,13 @@ class AppInitServiceImpl: AppInitService {
      */
     override fun init(): LoginUiState {
         return LoginUiState(
-            BackgroundComponent(color = "#ff0000"),
-            InputComponent("Username"),
-            InputComponent("Password"),
-            ButtonComponent("Login",
-                RequestAction("LOGIN_ACTION", "DEV", "/login")
+            listOf(
+                BackgroundComponent(color = "#eeeeee"),
+                UsernameComponent("Username"),
+                PasswordComponent("Password"),
+                ButtonComponent("Login",
+                    RequestAction("LOGIN_ACTION", "DEV", "/login")
+                )
             )
         )
     }
